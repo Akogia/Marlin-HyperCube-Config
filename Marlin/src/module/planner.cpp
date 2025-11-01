@@ -781,7 +781,7 @@ block_t* Planner::get_current_block() {
 block_t* Planner::get_future_block(const uint8_t offset) {
   const uint8_t nr_moves = movesplanned();
   if (nr_moves <= offset) return nullptr;
-  block_t * const block = &block_buffer[block_inc_mod(block_buffer_tail, offset)];
+  block_t * const block = &block_buffer[block_add_mod(block_buffer_tail, offset)];
   if (block->flag.recalculate) return nullptr;
   return block;
 }
@@ -878,6 +878,7 @@ void Planner::calculate_trapezoid_for_block(block_t * const block, const float e
     block->acceleration_time_inverse = acceleration_time_inverse;
     block->deceleration_time_inverse = deceleration_time_inverse;
   #endif
+
   #if ENABLED(SMOOTH_LIN_ADVANCE)
     block->cruise_time = plateau_steps > 0 ? float(plateau_steps) * float(STEPPER_TIMER_RATE) / float(cruise_rate) : 0;
   #endif
