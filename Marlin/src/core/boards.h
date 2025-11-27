@@ -20,7 +20,6 @@
  *
  */
 #pragma once
-
 /**
  * Whenever changes are made to this file, please update Marlin/Makefile
  * and _data/boards.yml in the MarlinDocumentation repo.
